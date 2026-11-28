@@ -1,5 +1,4 @@
 
-
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
@@ -31,7 +30,7 @@ rf_val_mae = mean_absolute_error(rf_val_predictions, val_y)
 print("Validation MAE for Random Forest Model: {:,.0f}".format(rf_val_mae))
 
 # 4. Train a new Random Forest model on ALL training data
-rf_model_on_full_data = RandomForestRegressor(random_state=1)
+rf_model_on_full_data = RandomForestRegressor(random_state=1, max_leaf_nodes= 10)
 rf_model_on_full_data.fit(X, y)
 
 # 5. Load test data and generate predictions (make sure test.csv is in the same folder)
@@ -39,6 +38,7 @@ test_data_path = 'test.csv'
 test_data = pd.read_csv(test_data_path)
 test_X = test_data[features]
 test_preds = rf_model_on_full_data.predict(test_X)
+
 
 # 6. Save predictions to submission.csv
 output = pd.DataFrame({
